@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="DestroyCartoon.com Anısına">
+    <meta name="author" content="DestroyCartoon.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2d3436">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2d3436">
+    <meta name="msapplication-navbutton-color" content="#2d3436">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>DestroyCartoon Anısına</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #header {
+            background-color: #2d3436;
+            padding: 20px;
+            text-align: left;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            margin-top: 85px;
+        }
+
+        #swfSelect {
+            width: 400px;
+            max-width: 90%;
+            height: 50px;
+            border: none;
+            background-color: #2d3436;
+            color: #fff;
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        #selectContainer {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        #githubLink {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #githubLink img {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    DestroyCartoon Anısına
+    <a id="githubLink" href="https://github.com/iltekin/destroycartoon" target="_blank">
+        <img src="img/github-mark-white.svg" alt="Github Repository" />
+    </a>
+</div>
+
+<div id="selectContainer">
+    <select id="swfSelect"></select>
+</div>
+
+<div id="container"></div>
+
+<script src="ruffle/ruffle.js"></script>
+<script>
+    window.RufflePlayer = window.RufflePlayer || {};
+
+    const swfOptions = [
+        "dayi.swf",
+        "imam.swf",
+        "pokeimam.swf",
+        "smatrix.swf",
+        "atraksiyonmemurlari.swf",
+        "mukusleo.swf",
+        "fatalsk8.swf",
+        "cevdet.swf",
+    ];
+
+    window.addEventListener("DOMContentLoaded", () => {
+        populateSelectBox();
+        changeSwf(swfOptions[0]);
+    });
+
+    const selectBox = document.getElementById("swfSelect");
+    selectBox.addEventListener("change", () => {
+        const selectedSwf = selectBox.value;
+        changeSwf(selectedSwf);
+    });
+
+    function populateSelectBox() {
+        const selectBox = document.getElementById("swfSelect");
+
+        swfOptions.forEach((swf) => {
+            const option = document.createElement("option");
+            option.value = swf;
+            option.text = swf;
+            selectBox.appendChild(option);
+        });
+    }
+
+    function changeSwf(swf) {
+        let ruffle = window.RufflePlayer.newest();
+        let player = ruffle.createPlayer();
+        let container = document.getElementById("container");
+
+        // Remove any existing players
+        while (container.firstChild) {
+            container.firstChild.remove();
+        }
+
+        container.appendChild(player);
+        player.load("swf/" + swf);
+
+        let maxWidth = window.innerWidth;
+        let width = maxWidth * 0.6;
+
+        if(maxWidth < 920) {
+            width = maxWidth * 0.95;
+        }
+
+        player.style.width = width + "px";
+        player.style.height = width * 0.75 + "px";
+    }
+</script>
+</body>
+</html>
