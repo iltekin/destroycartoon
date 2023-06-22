@@ -1,5 +1,8 @@
 # DestroyCartoon Anısına
 
+Proje URL:
+https://iltekin.com/destroycartoon/
+
 Bu proje, eski bir web sitesi olan DestroyCartoon.com'un anısına oluşturulmuş bir açık kaynaklı web uygulamasıdır. Bu uygulama, SWF animasyonları oynatabilen basit bir tek sayfalık web sitesidir.
 Animasyonların alındığı kaynak: https://web.archive.org/web/20060411154145/http://www.destroycartoon.com/2filim.htm
 
